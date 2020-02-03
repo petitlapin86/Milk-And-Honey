@@ -1,11 +1,17 @@
 package milk_and_honey;
 
-public class Shampoo extends Hair{
+/**
+ * Shampoo is a child of hair and includes shampoo specific methods
+ *
+ * @author Paige Jones
+ */
 
-	private boolean hairGrowth= false;
-	
-	public Shampoo(String name, double price, String decription, String[] ingredients, Integer size,
-			String hairType, boolean hairGrowth) {
+public class Shampoo extends Hair {
+
+	private boolean hairGrowth = false;
+
+	public Shampoo(String name, double price, String decription, String[] ingredients, Integer size, String hairType,
+			boolean hairGrowth) {
 		super(price, decription, name, ingredients, size, hairType);
 		this.hairGrowth = hairGrowth;
 		// TODO Auto-generated constructor stub
@@ -14,7 +20,7 @@ public class Shampoo extends Hair{
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -50,19 +56,19 @@ public class Shampoo extends Hair{
 	@Override
 	public void setIngredients(String[] ingredients) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setSize(int size) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setPrice(int price) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public boolean thickeningShampoo() {
@@ -70,12 +76,8 @@ public class Shampoo extends Hair{
 		return hairGrowth;
 	}
 
-	
-
-	
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return super.toString() + "\n Thickens = " + hairGrowth;
 	}
 
