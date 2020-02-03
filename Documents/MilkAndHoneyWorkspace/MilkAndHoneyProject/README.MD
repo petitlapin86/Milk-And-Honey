@@ -1,4 +1,4 @@
-PAIGE MADELINE JONES BU MET CS 622 HOMEWORK WEEK 2
+PAIGE MADELINE JONES BU MET CS 622 
 
 To RUN:
 Navigate to RetailWebsite.java (where my main class is located) 
@@ -11,15 +11,16 @@ The project is entitled MILK & HONEY
 
 It is a program that (when complete) will for browsing, selecting, adding, removing skin-care products to a cart and proceeding with checkout.
 
-Changes this week:
+CHANGES THIS WEEK 2:
 
 REFINE
 • successfully linked project to github
 • fixed errors within the retailwebsite.java from last week 
 • update readme.md to include run instructions
+• add code formatting
 
 IMPLEMENTATION
 • added a database for products and created a class that reads the file and assigns variables to each object. 
 • output the products to the console 
-
-
+•
+•
