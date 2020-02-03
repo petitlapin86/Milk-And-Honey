@@ -131,5 +131,9 @@ public class RetailWebsite {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		// Ask User if they would like to make a purchase
+		System.out.print("\n Would you like to add an item to your cart? Y/N: ");
+		String response = input.next();
+		System.out.println("Okay great! Lets go shopping \n");
 	}
 }
