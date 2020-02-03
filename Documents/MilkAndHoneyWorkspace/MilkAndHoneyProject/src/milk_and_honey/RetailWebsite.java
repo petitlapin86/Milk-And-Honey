@@ -91,14 +91,8 @@ public class RetailWebsite {
 					if (entries[numOfEntries - 1].equals("Y")) { // unless a Y is indicated in the .csv file
 						hairGrowth = true; // then assign to true
 					}
-					Shampoo shampooObject = new Shampoo(name, price, description, ingredients, size, hairType, // then
-																												// create
-																												// a new
-																												// shampoo
-																												// object
-																												// with
-																												// these
-																												// params
+					// then create a new shamoo object with these params
+					Shampoo shampooObject = new Shampoo(name, price, description, ingredients, size, hairType,
 							hairGrowth);
 					productList.add(shampooObject);
 					System.out.println(" Shampoo item was added with following info:");
@@ -111,15 +105,8 @@ public class RetailWebsite {
 
 						acnePreventor = true;
 					}
-					Moisturizer moisturizerObject = new Moisturizer(name, price, description, ingredients, size, // then
-																													// create
-																													// a
-																													// new
-																													// moisturizer
-																													// object
-																													// with
-																													// these
-																													// params
+					// then create a new moisturizer object with these params
+					Moisturizer moisturizerObject = new Moisturizer(name, price, description, ingredients, size,
 							skinType, acnePreventor);
 					productList.add(moisturizerObject);
 					System.out.println("\n Moisturizer item was added with following info:");
@@ -132,16 +119,8 @@ public class RetailWebsite {
 					if (entries[numOfEntries - 1].equals("Y")) {
 						forDrySkin = true;
 					}
-					BodyOil bodyoilObject = new BodyOil(name, price, description, ingredients, size, bodyConcern, // then
-																													// create
-																													// a
-																													// new
-																													// body
-																													// oil
-																													// object
-																													// with
-																													// these
-																													// params
+					// then create a new body oil object with these params
+					BodyOil bodyoilObject = new BodyOil(name, price, description, ingredients, size, bodyConcern,
 							forDrySkin);
 					productList.add(bodyoilObject);
 					System.out.println("\n Body Oil item was added with following info:");

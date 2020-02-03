@@ -20,11 +20,26 @@ public abstract class Item { // super class
 
 	protected int size;
 
+	protected int quantity;
+
 	public abstract void display();
 
 	public abstract String getType();
 
-	public abstract double getPrice();
+	// Returns the price of the item
+	public double getPrice() {
+		return price;
+	};
+
+	// Returns the name of the item
+	public String getName() {
+		return name;
+	};
+
+	// Returns the quantity of the item
+	public int getQuantity() {
+		return quantity;
+	}
 
 	public abstract String getDescription();
 
