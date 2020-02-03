@@ -1,10 +1,17 @@
 package milk_and_honey;
 
-public class Moisturizer extends Face{
+/**
+ * Moisturizer is a child of Face and includes moisturizer specific methods
+ *
+ * @author Paige Jones
+ */
+
+public class Moisturizer extends Face {
 
 	private boolean acnePreventor;
-	public Moisturizer(String name, double price, String decription, String[] ingredients, Integer size, String skinType, 
-			boolean acnePreventor) {
+
+	public Moisturizer(String name, double price, String decription, String[] ingredients, Integer size,
+			String skinType, boolean acnePreventor) {
 		super(price, decription, name, ingredients, size, skinType);
 		this.acnePreventor = acnePreventor;
 		// TODO Auto-generated constructor stub
@@ -13,7 +20,7 @@ public class Moisturizer extends Face{
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -49,28 +56,24 @@ public class Moisturizer extends Face{
 	@Override
 	public void setIngredients(String[] ingredients) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setSize(int size) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setPrice(int price) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return super.toString() + "\n Acne Preventor = " + acnePreventor;
 	}
-
-
-	
 
 }
