@@ -7,10 +7,12 @@ package milk_and_honey;
  */
 public class BodyOil extends Body { // inherits from body which inherits from super class item
 
-	public BodyOil(double price, String decription, String name, String[] ingredients, Integer size,
-			String description) {
-		super(price, decription, name, ingredients, size, description);
-		// TODO Auto-generated constructor stub
+	private boolean forDrySkin;
+
+	public BodyOil(String name, double price, String decription, String[] ingredients, Integer size, String bodyConcern,
+			boolean forDrySkin) {
+		super(price, decription, name, ingredients, size, bodyConcern);
+		this.forDrySkin = forDrySkin;
 	}
 
 	@Override
@@ -65,6 +67,11 @@ public class BodyOil extends Body { // inherits from body which inherits from su
 	public void setPrice(int price) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public String toString() {
+		return super.toString() + "\n For Dry Skin = " + forDrySkin;
 	}
 
 }

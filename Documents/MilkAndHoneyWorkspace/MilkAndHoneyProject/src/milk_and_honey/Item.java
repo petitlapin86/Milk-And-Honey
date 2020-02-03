@@ -39,7 +39,7 @@ public abstract class Item { // super class
 	public abstract void setPrice(int price);
 
 	// constructor for new products
-	public Item(double price, String decription, String name, String[] ingredients, Integer size) {
+	public Item(double price, String description, String name, String[] ingredients, Integer size) {
 		this.price = price;
 		this.description = description;
 		this.name = name;
@@ -50,7 +50,7 @@ public abstract class Item { // super class
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		str.append(" Name = " + name + "\n Price = " + price + "\n Description = " + description);
+		str.append(" Name = " + name + "\n Price = $" + price + "\n Description = " + description);
 		str.append("\n Ingredients = ");
 		for (int i = 0; i < ingredients.length; i++) {
 			str.append(ingredients[i]);
@@ -59,7 +59,7 @@ public abstract class Item { // super class
 				str.append(",");
 			}
 		}
-		str.append("\n Size = " + size);
+		str.append("\n Size = " + size + "ml");
 		return str.toString();
 
 	}

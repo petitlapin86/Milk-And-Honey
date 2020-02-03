@@ -16,6 +16,7 @@ public class RetailWebsite {
 
 	private static final String SHAMPOO = "Shampoo";
 	private static final String MOISTURIZER = "Moisturizer";
+	private static final String BODYOIL = "BodyOil";
 
 	// Function to compute discount based on user cart
 	double discountComputer(Cart userCart) {
@@ -95,8 +96,18 @@ public class RetailWebsite {
 					System.out.println("Moisturizer item was added with following info:");
 					System.out.println(moisturizerObject);
 
-				} else {
-					// just add else if for other products
+				} else if (entries[0].equals(BODYOIL)) {
+
+					String skinType = entries[numOfEntries - 2];
+					boolean forDrySkin = false;
+					if (entries[numOfEntries - 1].equals("Y")) {
+						forDrySkin = true;
+					}
+					BodyOil bodyoilObject = new BodyOil(name, price, description, ingredients, size, skinType,
+							forDrySkin);
+					productList.add(bodyoilObject);
+					System.out.println("Body Oil item was added with following info:");
+					System.out.println(bodyoilObject);
 				}
 
 			}
