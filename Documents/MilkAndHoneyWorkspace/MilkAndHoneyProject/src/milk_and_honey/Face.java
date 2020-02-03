@@ -1,16 +1,19 @@
 package milk_and_honey;
 
+/**
+ * Face is a child of item and includes face specific methods
+ *
+ * @paige
+ */
 public abstract class Face extends Item {
-	
-	String skinType; 
-	
-	public  String getSkinType()
-	{
+
+	String skinType;
+
+	public String getSkinType() {
 		return skinType;
 	}
-	
-	public  void setSkinType(String skinType)
-	{
+
+	public void setSkinType(String skinType) {
 		this.skinType = skinType;
 	}
 
@@ -19,12 +22,10 @@ public abstract class Face extends Item {
 		this.skinType = skinType;
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
-	public String toString()
-	{
-		return super.toString() +  "\n skinType = "+ skinType;
+	public String toString() {
+		return super.toString() + "\n skinType = " + skinType;
 	}
-	
 
 }

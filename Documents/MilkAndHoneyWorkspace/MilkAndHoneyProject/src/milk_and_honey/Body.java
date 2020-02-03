@@ -1,16 +1,20 @@
 package milk_and_honey;
 
-public abstract class Body extends Item{ //body inherits from super class item 
-	
+/**
+ * Body is a child of item and includes body specific methods
+ *
+ * @paige
+ */
+
+public abstract class Body extends Item { // body inherits from super class item
+
 	String bodyConcern;
-	
-	public String getBodyConcern()
-	{
+
+	public String getBodyConcern() {
 		return bodyConcern;// define methods that are specific to body class
 	}
-	
-	public void setBodyConcern(String bodyConcern)
-	{
+
+	public void setBodyConcern(String bodyConcern) {
 		this.bodyConcern = bodyConcern;
 	}
 

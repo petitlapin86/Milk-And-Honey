@@ -1,16 +1,20 @@
 package milk_and_honey;
 
+/**
+ * Body is a child of item and includes body specific methods
+ *
+ * @paige
+ */
+
 public abstract class Hair extends Item {
-	
+
 	String hairType;
-	
-	public  String getHairType()
-	{
+
+	public String getHairType() {
 		return hairType;
 	}
-	
-	public  void setHairType(String hairType)
-	{
+
+	public void setHairType(String hairType) {
 		this.hairType = hairType;
 	}
 
@@ -19,11 +23,10 @@ public abstract class Hair extends Item {
 		this.hairType = hairType;
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
-	public String toString()
-	{
-		return super.toString() +  "\n hairType = "+ hairType;
+	public String toString() {
+		return super.toString() + "\n hairType = " + hairType;
 	}
-	
+
 }
