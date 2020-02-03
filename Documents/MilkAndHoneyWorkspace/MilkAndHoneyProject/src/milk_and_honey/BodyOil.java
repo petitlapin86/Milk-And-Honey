@@ -1,6 +1,11 @@
 package milk_and_honey;
 
-public class BodyOil extends Body { //inherits from body which inherits from super class item
+/**
+ * Body Oil is a child of Body and includes bodyoil specific methods
+ *
+ * @author Paige Jones
+ */
+public class BodyOil extends Body { // inherits from body which inherits from super class item
 
 	public BodyOil(double price, String decription, String name, String[] ingredients, Integer size,
 			String description) {
@@ -11,7 +16,7 @@ public class BodyOil extends Body { //inherits from body which inherits from sup
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -47,22 +52,19 @@ public class BodyOil extends Body { //inherits from body which inherits from sup
 	@Override
 	public void setIngredients(String[] ingredients) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setSize(int size) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setPrice(int price) {
 		// TODO Auto-generated method stub
-		
+
 	}
-
-	
-
 
 }

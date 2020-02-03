@@ -3,7 +3,7 @@ package milk_and_honey;
 /**
  * Face is a child of item and includes face specific methods
  *
- * @paige
+ * @author Paige Jones
  */
 public abstract class Face extends Item {
 

@@ -1,9 +1,9 @@
 package milk_and_honey;
 
 /**
- * Body is a child of item and includes body specific methods
+ * Hair is a child of item and includes hair specific methods
  *
- * @paige
+ * @author Paige Jones
  */
 
 public abstract class Hair extends Item {

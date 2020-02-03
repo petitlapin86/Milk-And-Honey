@@ -2,7 +2,11 @@ package milk_and_honey;
 
 import java.util.ArrayList;
 
-
+/**
+ * Cart will have methods involving product quantities and prices
+ *
+ * @author Paige Jones
+ */
 
 public class Cart {
 

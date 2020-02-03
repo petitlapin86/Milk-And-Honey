@@ -3,7 +3,7 @@ package milk_and_honey;
 /**
  * Body is a child of item and includes body specific methods
  *
- * @paige
+ * @author paige
  */
 
 public abstract class Body extends Item { // body inherits from super class item
