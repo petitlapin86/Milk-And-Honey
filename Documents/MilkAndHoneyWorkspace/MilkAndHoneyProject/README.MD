@@ -21,6 +21,5 @@ REFINE
 
 IMPLEMENTATION
 • added a database for products and created a class that reads the file and assigns variables to each object. 
-• output the products to the console 
-•
-•
+• output the products to the console including child specific variations (for example is this face cream an acne preventer? T/F). 
+• added a scanner for user input of name and program introduction. 
