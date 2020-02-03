@@ -57,19 +57,20 @@ public class RetailWebsite {
 
 		Scanner input = new Scanner(System.in);
 
-		// Getting float input
+		// Ask User for name
 		System.out.print("Welcome! What is your name?: ");
 		String myString = input.next();
 		System.out.println("Hey " + myString + ", Thanks for stopping by the Milk & Honey Store. \n");
 
-		// Getting String input
+		// Print Introduction to console
 		System.out.println(
-				"All of our products are created by simple, whole ingredients found in nature. \nIn an effort to lower our carbon footprint we work with farms located within \nthe state of vermont (where you'll find us!) Check out our product list: \n");
+				"All of our products are created by simple, whole ingredients found in nature. \nIn an effort to lower our carbon footprint we work with farms located within \nthe state of Vermont (where you'll find us!) Check out our product list: \n");
 
+		// Read products from database .csv file
 		ArrayList<Item> productList = new ArrayList<Item>();
 		String fileName = "/Users/paige/Documents/MilkAndHoneyWorkspace/MilkAndHoneyProject/src/database/product_database.csv";
 		String line = "";
-		String delimiter = ",";
+		String delimiter = ","; // comma separates the objects
 		try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
 			while ((line = reader.readLine()) != null) {
 				String[] entries = line.split(delimiter);
@@ -84,41 +85,66 @@ public class RetailWebsite {
 				}
 				int size = Integer.parseInt(entries[startIngredientEntry + numOfIngredients]);
 				int numOfEntries = entries.length;
-				if (entries[0].equals(SHAMPOO)) {
+				if (entries[0].equals(SHAMPOO)) { // If the first word in the line is shampoo
 					String hairType = entries[numOfEntries - 2];
-					boolean hairGrowth = false;
-					if (entries[numOfEntries - 1].equals("Y")) {
-						hairGrowth = true;
+					boolean hairGrowth = false; // assume hairgrowth is false
+					if (entries[numOfEntries - 1].equals("Y")) { // unless a Y is indicated in the .csv file
+						hairGrowth = true; // then assign to true
 					}
-					Shampoo shampooObject = new Shampoo(name, price, description, ingredients, size, hairType,
+					Shampoo shampooObject = new Shampoo(name, price, description, ingredients, size, hairType, // then
+																												// create
+																												// a new
+																												// shampoo
+																												// object
+																												// with
+																												// these
+																												// params
 							hairGrowth);
 					productList.add(shampooObject);
-					System.out.println("Shampoo item was added with following info:");
+					System.out.println(" Shampoo item was added with following info:");
 					System.out.println(shampooObject);
-				} else if (entries[0].equals(MOISTURIZER)) {
+				} else if (entries[0].equals(MOISTURIZER)) { // Or If the first word in the line is moisturizer
 
 					String skinType = entries[numOfEntries - 2];
 					boolean acnePreventor = false;
 					if (entries[numOfEntries - 1].equals("Y")) {
+
 						acnePreventor = true;
 					}
-					Moisturizer moisturizerObject = new Moisturizer(name, price, description, ingredients, size,
+					Moisturizer moisturizerObject = new Moisturizer(name, price, description, ingredients, size, // then
+																													// create
+																													// a
+																													// new
+																													// moisturizer
+																													// object
+																													// with
+																													// these
+																													// params
 							skinType, acnePreventor);
 					productList.add(moisturizerObject);
-					System.out.println("Moisturizer item was added with following info:");
+					System.out.println("\n Moisturizer item was added with following info:");
 					System.out.println(moisturizerObject);
 
-				} else if (entries[0].equals(BODYOIL)) {
+				} else if (entries[0].equals(BODYOIL)) { // Or If the first word in the line is body oil
 
-					String skinType = entries[numOfEntries - 2];
+					String bodyConcern = entries[numOfEntries - 2];
 					boolean forDrySkin = false;
 					if (entries[numOfEntries - 1].equals("Y")) {
 						forDrySkin = true;
 					}
-					BodyOil bodyoilObject = new BodyOil(name, price, description, ingredients, size, skinType,
+					BodyOil bodyoilObject = new BodyOil(name, price, description, ingredients, size, bodyConcern, // then
+																													// create
+																													// a
+																													// new
+																													// body
+																													// oil
+																													// object
+																													// with
+																													// these
+																													// params
 							forDrySkin);
 					productList.add(bodyoilObject);
-					System.out.println("Body Oil item was added with following info:");
+					System.out.println("\n Body Oil item was added with following info:");
 					System.out.println(bodyoilObject);
 				}
 
