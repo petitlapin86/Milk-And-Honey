@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Main class is located in this file
@@ -53,6 +54,17 @@ public class RetailWebsite {
 	}
 
 	public static void main(String[] args) {
+
+		Scanner input = new Scanner(System.in);
+
+		// Getting float input
+		System.out.print("Welcome! What is your name?: ");
+		String myString = input.next();
+		System.out.println("Hey " + myString + ", Thanks for stopping by the Milk & Honey Store. \n");
+
+		// Getting String input
+		System.out.println(
+				"All of our products are created by simple, whole ingredients found in nature. \nIn an effort to lower our carbon footprint we work with farms located within \nthe state of vermont (where you'll find us!) Check out our product list: \n");
 
 		ArrayList<Item> productList = new ArrayList<Item>();
 		String fileName = "/Users/paige/Documents/MilkAndHoneyWorkspace/MilkAndHoneyProject/src/database/product_database.csv";
