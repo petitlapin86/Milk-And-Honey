@@ -71,6 +71,8 @@ public class Moisturizer extends Face {
 
 	}
 
+	// this adds on to the output within retailwebsite.java when the object is
+	// moisturizer
 	@Override
 	public String toString() {
 		return super.toString() + "\n Acne Preventor = " + acnePreventor;

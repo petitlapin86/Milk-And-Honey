@@ -76,6 +76,8 @@ public class Shampoo extends Hair {
 		return hairGrowth;
 	}
 
+	// this adds on to the output within retailwebsite.java when the object is
+	// shampoo
 	@Override
 	public String toString() {
 		return super.toString() + "\n Thickens = " + hairGrowth;

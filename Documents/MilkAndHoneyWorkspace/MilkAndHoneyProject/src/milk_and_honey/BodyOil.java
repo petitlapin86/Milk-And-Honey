@@ -69,6 +69,8 @@ public class BodyOil extends Body { // inherits from body which inherits from su
 
 	}
 
+	// this adds on to the output within retailwebsite.java when the object is body
+	// oil
 	@Override
 	public String toString() {
 		return super.toString() + "\n For Dry Skin = " + forDrySkin;
