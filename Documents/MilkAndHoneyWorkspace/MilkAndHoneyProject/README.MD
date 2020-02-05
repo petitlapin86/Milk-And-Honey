@@ -18,8 +18,11 @@ REFINE
 • fixed errors within the retailwebsite.java from last week 
 • update readme.md to include run instructions
 • add code formatting
+• began working on cart functionality
 
 IMPLEMENTATION
 • added a database for products and created a class that reads the file and assigns variables to each object. 
 • output the products to the console including child specific variations (for example is this face cream an acne preventer? T/F). 
 • added a scanner for user input of name and program introduction. 
+• implemented first JUNIT test (RetailWebsiteTest.java)
+• implemented Exceptions: insufficientAttributException, invalidProductTypeException and ProductDatabaseFileException
