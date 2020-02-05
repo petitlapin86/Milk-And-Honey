@@ -23,6 +23,7 @@ public abstract class Face extends Item {
 		// TODO Auto-generated constructor stub
 	}
 
+	// this is for output relating to retailwebsite.java
 	@Override
 	public String toString() {
 		return super.toString() + "\n skinType = " + skinType;

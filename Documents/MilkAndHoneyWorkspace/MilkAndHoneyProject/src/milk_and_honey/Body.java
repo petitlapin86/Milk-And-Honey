@@ -24,6 +24,7 @@ public abstract class Body extends Item { // body inherits from super class item
 		// TODO Auto-generated constructor stub
 	}
 
+	// this is for output relating to retailwebsite.java
 	@Override
 	public String toString() {
 		return super.toString() + "\n Body Concern = " + bodyConcern;

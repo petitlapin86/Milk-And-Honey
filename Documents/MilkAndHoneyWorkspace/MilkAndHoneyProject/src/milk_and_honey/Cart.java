@@ -6,6 +6,8 @@ import java.util.ArrayList;
  * Cart has methods involving product quantities and prices
  *
  * @author Paige Jones
+ * 
+ *         TODO finish cart implementation
  */
 
 public class Cart {
