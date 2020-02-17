@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -19,6 +20,17 @@ public class RetailWebsite {
 	private static final String MOISTURIZER = "Moisturizer";
 	private static final String BODYOIL = "BodyOil";
 	private static final int MINIMUM_ATTRIBUTES_COUNT = 8;
+
+	private ArrayList<Item> productList;
+	private HashMap<String, ArrayList<Item>> productLookUp;
+	private Cart userCart;
+
+	public RetailWebsite() {
+		productList = new ArrayList<Item>();
+		productLookUp = new HashMap<String, ArrayList<Item>>();
+		userCart = new Cart();
+
+	}
 
 	// Function to compute discount based on user cart
 	double discountComputer(Cart userCart) {
@@ -54,10 +66,19 @@ public class RetailWebsite {
 		return thickShampoos;
 	}
 
-	public static ArrayList<Item> processProductDatabase(String fileName)
+	private void addItemToLookUp(String itemType, Item currentItem) {
+
+		if (!productLookUp.containsKey(itemType)) {
+			productLookUp.put(itemType, new ArrayList<Item>());
+
+		}
+		productLookUp.get(itemType).add(currentItem);
+
+	}
+
+	public ArrayList<Item> processProductDatabase(String fileName)
 			throws IOException, InvalidProductTypeException, InsufficientAttributeException {
 		// Read products from database .csv file
-		ArrayList<Item> productList = new ArrayList<Item>();
 
 		String line = "";
 		String delimiter = ","; // comma separates the objects
@@ -91,8 +112,9 @@ public class RetailWebsite {
 					Shampoo shampooObject = new Shampoo(name, price, description, ingredients, size, hairType,
 							hairGrowth);
 					productList.add(shampooObject);
-					System.out.println(" Shampoo item was added with following info:");
-					System.out.println(shampooObject);
+					addItemToLookUp(SHAMPOO, shampooObject);
+//					System.out.println(" Shampoo item was added with following info:");
+//					System.out.println(shampooObject);
 				} else if (entries[0].equals(MOISTURIZER)) { // Or If the first word in the line is moisturizer
 
 					String skinType = entries[numOfEntries - 2];
@@ -105,8 +127,9 @@ public class RetailWebsite {
 					Moisturizer moisturizerObject = new Moisturizer(name, price, description, ingredients, size,
 							skinType, acnePreventor);
 					productList.add(moisturizerObject);
-					System.out.println("\n Moisturizer item was added with following info:");
-					System.out.println(moisturizerObject);
+					addItemToLookUp(MOISTURIZER, moisturizerObject);
+//					System.out.println("\n Moisturizer item was added with following info:");
+//					System.out.println(moisturizerObject);
 
 				} else if (entries[0].equals(BODYOIL)) { // Or If the first word in the line is body oil
 
@@ -119,8 +142,9 @@ public class RetailWebsite {
 					BodyOil bodyoilObject = new BodyOil(name, price, description, ingredients, size, bodyConcern,
 							forDrySkin);
 					productList.add(bodyoilObject);
-					System.out.println("\n Body Oil item was added with following info:");
-					System.out.println(bodyoilObject);
+					addItemToLookUp(BODYOIL, bodyoilObject);
+//					System.out.println("\n Body Oil item was added with following info:");
+//					System.out.println(bodyoilObject);
 				} else {
 					throw new InvalidProductTypeException(entries[0] + " is an invalid product type");
 				}
@@ -130,43 +154,96 @@ public class RetailWebsite {
 		return productList;
 	}
 
-	public static void main(String[] args) throws ProductDatabaseFileException {
+	// Main Shopping Screen
+	public void startShopping() {
 
-		Scanner input = new Scanner(System.in);
+		Scanner in = new Scanner(System.in);
+		int choice;
 
-		// Ask User for name
-		System.out.print("Welcome! What is your name?: ");
-		String myString = input.next();
-		System.out.println("Hey " + myString + ", Thanks for stopping by the Milk & Honey Store. \n");
+		while (true) {
 
-		// Print Introduction to console
-		System.out.println(
-				"All of our products are created by simple, whole ingredients found in nature. \nIn an effort to lower our carbon footprint we work with farms located within \nthe state of Vermont (where you'll find us!) Check out our product list: \n");
+			System.out.println("1. Hair Care");
+			System.out.println("2. Body");
+			System.out.println("3. Face");
+			System.out.println("4. Display All Products");
+			System.out.println("5. Display Cart Contents");
+			System.out.println("0. Exit");
 
-		// Load and process product database
-		String fileName = "./src/database/product_database.csv";
-		ArrayList<Item> productList = new ArrayList<Item>();
-		try {
-			productList = processProductDatabase(fileName);
-		} catch (IOException | InvalidProductTypeException | InsufficientAttributeException e) {
-			// e.printStackTrace();
-			// throw new ProductDatabaseFileException("Inconsistency in the product database
-			// csv");
-			throw new ProductDatabaseFileException(e.getMessage());
+			choice = in.nextInt();
+
+			switch (choice) {
+			case 1:
+				System.out.println("Below is the list of Hair Care products");
+				selectProduct(SHAMPOO, in);
+				break;
+			case 2:
+				System.out.println("Below is the list of Body products");
+				selectProduct(BODYOIL, in);
+				break;
+			case 3:
+				System.out.println("Below is the list of Face products");
+				selectProduct(MOISTURIZER, in);
+				break;
+			case 4:
+				displayAllProducts();
+				break;
+			case 5:
+				userCart.displayCart();
+				break;
+			case 0:
+				System.out.println("Thank you for shooping at Milk and Honey");
+				return;
+			default:
+				System.out.println("Invalid choice. PLease enter one of the options from the following menu");
+			}
 
 		}
+	}
 
-		// Ask User if they would like to make a purchase
-		System.out.print("\n Would you like to add an item to your cart? Y/N: ");
-		String answer = input.next();
-		if (answer.equals("Y"))
-			System.out.println(" Okay great! Lets go shopping \n");
-		else
-			System.out.println(" Thanks for browsing, goodbye. \n");
+	private void displayItemsOfGivenType(String type) {
+		int i = 1;
+		for (Item currentItem : productLookUp.get(type)) {
+			System.out.println((i++) + ". " + currentItem);
+		}
+	}
 
-		// TODO create selection of products
-		// TODO LOOP through shopping experience
-		// until user is finished adding items to cart
+	private void displayAllProducts() {
+		System.out.println("Below is tour product list");
+		int i = 1;
+		for (Item currentItem : productList) {
+			System.out.println((i++) + ". " + currentItem);
+		}
+	}
+
+	private void selectProduct(String itemType, Scanner in) {
+		displayItemsOfGivenType(itemType);
+		int choice;
+
+		while (true) {
+
+			System.out.println("1. Add item to cart");
+			System.out.println("2. Remove item from cart");
+			System.out.println("0. Back to Main Menu");
+
+			choice = in.nextInt();
+
+			switch (choice) {
+			case 1:
+				System.out.println("Please enter the item number to add to cart");
+				int itemId = in.nextInt();
+				Item itemToAdd = productLookUp.get(itemType).get(itemId - 1);
+				userCart.addToCart(itemToAdd);
+				break;
+			case 2:
+				// To-do implement this
+				break;
+			case 0:
+				return;
+			default:
+				System.out.println("Invalid choice. PLease enter one of the options from the following menu");
+			}
+		}
 
 	}
+
 }
