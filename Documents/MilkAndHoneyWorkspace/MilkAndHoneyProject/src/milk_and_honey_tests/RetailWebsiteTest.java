@@ -21,11 +21,13 @@ import milk_and_honey.RetailWebsite;
 
 class RetailWebsiteTest {
 
+	RetailWebsite mywebsite = new RetailWebsite();
+
 	@Test // every Junit test is annotated with @Test tag.
 	void testInvalidFilePath() { // This is the unit test name
 		String filename = "invalid.csv"; // invalid file name
 		Assertions.assertThrows(IOException.class, () -> {
-			RetailWebsite.processProductDatabase(filename);
+			mywebsite.processProductDatabase(filename);
 		}); // assertThrows will check if the invoked method throws the exception specified
 			// as the first parameter. Here I am checking whether processProductDatabase is
 			// throwing IOException
@@ -35,7 +37,7 @@ class RetailWebsiteTest {
 	void testInvalidProductType() {
 		String filename = "./src/test_database/invalid_product_type.csv"; // file with invalid product
 		Assertions.assertThrows(InvalidProductTypeException.class, () -> {
-			RetailWebsite.processProductDatabase(filename);
+			mywebsite.processProductDatabase(filename);
 		}); // assertThrows will check if the invoked method throws the exception specified
 			// as the first parameter. Here I am checking whether processProductDatabase is
 			// throwing InvalidProductTypeException
@@ -45,7 +47,7 @@ class RetailWebsiteTest {
 	void testInsufficientAttributes() {
 		String filename = "./src/test_database/insuff_attri.csv"; // file with invalid product
 		Assertions.assertThrows(InsufficientAttributeException.class, () -> {
-			RetailWebsite.processProductDatabase(filename);
+			mywebsite.processProductDatabase(filename);
 		}); // assertThrows will check if the invoked method throws the exception specified
 			// as the first parameter. Here I am checking whether processProductDatabase is
 			// throwing InsufficientAttributeException
