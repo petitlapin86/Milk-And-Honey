@@ -1,3 +1,8 @@
+/**
+ * Purpose: SQL DATABASE CONNECTION 
+ * @author Paige Jones
+ */
+
 package milk_and_honey;
 
 import java.sql.Connection;

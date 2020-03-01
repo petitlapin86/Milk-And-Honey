@@ -8,9 +8,6 @@ package milk_and_honey;
 
 public abstract class Body extends Item { // body inherits from super class item
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4040303259804983252L;
 	String bodyConcern;
 

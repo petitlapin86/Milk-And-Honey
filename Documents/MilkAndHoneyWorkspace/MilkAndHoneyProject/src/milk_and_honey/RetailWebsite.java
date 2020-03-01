@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 /**
- * Main class is located in this file this will be the main hub of my program
+ * Purpose:
  * 
  * @author Paige Jones
  */

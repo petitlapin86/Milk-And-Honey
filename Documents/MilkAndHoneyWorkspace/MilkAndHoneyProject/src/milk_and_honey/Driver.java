@@ -4,6 +4,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Purpose: Run application •Main method is located here •A new User thread is
+ * create for each user here
+ * 
+ * @author Paige Jones
+ */
+
 public class Driver {
 
 	public static void main(String[] args) throws ProductDatabaseFileException {

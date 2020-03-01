@@ -8,6 +8,12 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Purpose: Create tables for products
+ * 
+ * @author Paige Jones
+ */
+
 public class ProductDbCreator {
 
 	private static void addItemToLookUp(ConcurrentHashMap<String, ArrayList<Item>> productLookUp, String itemType,

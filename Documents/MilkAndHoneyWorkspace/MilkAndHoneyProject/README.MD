@@ -71,10 +71,16 @@ IMPLEMENTATION
 • Use SQL to create table
 • Use SQL to order products by price productsHighToLow()
 • Use SQL to join tables and show all discounted products displayAllDiscountedProducts()
-• add Id to each product in processProductDatabase class()
+• add Id to each product in processProductDatabase class() 
 
+CHANGES THIS WEEK 6:
+• implement concurrency - use threads to allow multiple users to access our website
+• refactored retailwebsite.java
+• fixed the db error on inserting duplicated
+• update heading comments throughout 
 
-TO RUN IN WEEK 4
+TO RUN IN WEEK 6
 •To run the original MilkAndHoneyProject navigate to src > milk_and_honey > driver.java and hit run. 
-•To launch the MilkAndHoneyjavaFX version navigate src > application > Main.java and hit run.   
+•To launch the MilkAndHoneyjavaFX version navigate src > application > Main.java and hit run.  
+
 

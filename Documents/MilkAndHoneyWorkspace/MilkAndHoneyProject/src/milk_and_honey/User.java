@@ -1,3 +1,10 @@
+/**
+ * Purpose: Welcome the user 
+ *  Precondition: User launches application
+ *	Postcondition: User is welcomed and invited to enter store
+ * @author Paige Jones
+ */
+
 package milk_and_honey;
 
 import java.util.Scanner;
