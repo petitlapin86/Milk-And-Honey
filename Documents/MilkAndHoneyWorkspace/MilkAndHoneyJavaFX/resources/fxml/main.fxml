@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.GridPane.*?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+
+
+<!-- this is similar to html file - essentially the view-->
+<!-- I link to the controller and to the css here-->
+<!-- I define the window elements here-->
+
+<GridPane prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
+     fx:controller="application.Controller"
+     stylesheets="css/application.css"
+     >  
+     
+     <ImageView 
+     fitHeight="60.0" 
+     pickOnBounds="true" preserveRatio="true" 
+     GridPane.rowIndex="0"
+     GridPane.columnIndex="4"> 
+    	 <image>
+    	 <Image url="/img/cart.jpg"/>
+    	 </image>
+     </ImageView>
+    
+    <Text text="milk and honey"
+    styleClass="title"
+    GridPane.rowIndex="0"
+    GridPane.columnSpan="4"
+    GridPane.halignment="CENTER"/>
+    
+    <Label text="First Name:"
+    GridPane.rowIndex="1"
+    GridPane.columnIndex="0"
+    />
+   
+   <TextField fx:id="firstName"
+    GridPane.rowIndex="2"
+    GridPane.columnSpan="4"
+    ></TextField>
+   
+   <Button fx:id="button"
+    text="Submit"
+    onAction="#handleName"
+   	GridPane.rowIndex="3"
+   	GridPane.columnIndex="3"
+   	GridPane.halignment="RIGHT"
+   	/>
+   	
+   	<Button fx:id="button"
+    text="Body"
+   	GridPane.rowIndex="4"
+   	GridPane.columnIndex="0"
+   	GridPane.halignment="CENTER"
+   	/>
+   	
+   	<Button fx:id="button"
+    text="Face"
+   	GridPane.rowIndex="4"
+   	GridPane.columnIndex="1"
+   	GridPane.halignment="CENTER"
+   	/>
+   	
+   	<Button fx:id="button"
+    text="Hair"
+   	GridPane.rowIndex="4"
+   	GridPane.columnIndex="2"
+   	GridPane.halignment="CENTER"
+   	/>
+   	
+   	<Button fx:id="button"
+    text="All"
+   	GridPane.rowIndex="4"
+   	GridPane.columnIndex="3"
+    GridPane.halignment="LEFT"
+   	/>
+   	
+   
+     <ImageView 
+     fitHeight="275.0" 
+     pickOnBounds="true" preserveRatio="true" 
+     GridPane.rowIndex="5"
+     GridPane.columnSpan="4"> 
+    	 <image>
+    	 <Image url="/img/pinkproducts.jpg"/>
+    	 </image>
+     </ImageView>
+     
+
+    <Button fx:id="button"
+    text="Exit"
+    onAction="#exitApp"
+   	GridPane.rowIndex="6"
+   	GridPane.columnIndex="3"
+   	GridPane.halignment="RIGHT"
+   	/>
+   	
+</GridPane>
+

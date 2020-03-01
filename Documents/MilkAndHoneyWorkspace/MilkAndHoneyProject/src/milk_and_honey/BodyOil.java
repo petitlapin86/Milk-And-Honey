@@ -7,11 +7,15 @@ package milk_and_honey;
  */
 public class BodyOil extends Body { // inherits from body which inherits from super class item
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -401226174375686470L;
 	private boolean forDrySkin;
 
-	public BodyOil(String name, double price, String decription, String[] ingredients, Integer size, String bodyConcern,
-			boolean forDrySkin) {
-		super(price, decription, name, ingredients, size, bodyConcern);
+	public BodyOil(int id, String category, String name, double price, String decription, String[] ingredients,
+			int size, int quantity, String bodyConcern, boolean forDrySkin) {
+		super(id, category, price, decription, name, ingredients, size, quantity, bodyConcern);
 		this.forDrySkin = forDrySkin;
 	}
 

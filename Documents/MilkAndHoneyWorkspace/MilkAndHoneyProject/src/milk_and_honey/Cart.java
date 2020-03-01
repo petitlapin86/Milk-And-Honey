@@ -35,6 +35,10 @@ public class Cart {
 		cart.add(item);
 	}
 
+	public void removeFromCart(Item item) {
+
+	}
+
 	// Gets the total cost of cart
 	public double getTotalCartValue() {
 		total = (price * quantity);

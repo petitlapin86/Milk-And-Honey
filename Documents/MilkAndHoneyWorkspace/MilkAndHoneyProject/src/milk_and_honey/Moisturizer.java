@@ -8,11 +8,15 @@ package milk_and_honey;
 
 public class Moisturizer extends Face {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 899532925513900343L;
 	private boolean acnePreventor;
 
-	public Moisturizer(String name, double price, String decription, String[] ingredients, Integer size,
-			String skinType, boolean acnePreventor) {
-		super(price, decription, name, ingredients, size, skinType);
+	public Moisturizer(int id, String category, String name, double price, String decription, String[] ingredients,
+			int size, int quantity, String skinType, boolean acnePreventor) {
+		super(id, category, price, decription, name, ingredients, size, quantity, skinType);
 		this.acnePreventor = acnePreventor;
 		// TODO Auto-generated constructor stub
 	}

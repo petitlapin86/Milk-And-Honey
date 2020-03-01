@@ -1,5 +1,7 @@
 package milk_and_honey;
 
+import java.io.Serializable;
+
 /**
  * Item is a super class that stubs out new products body, face and hair all
  * inherit from this class as well as their children: shampoo, body oil and
@@ -8,7 +10,16 @@ package milk_and_honey;
  * @author Paige Jones
  */
 
-public abstract class Item { // super class
+public abstract class Item implements Serializable {
+	/**
+	* 
+	*/
+	private static final long serialVersionUID = 7504989085447975048L;
+
+// super class
+	protected int id;
+
+	protected String category;
 
 	protected double price;
 
@@ -53,13 +64,21 @@ public abstract class Item { // super class
 
 	public abstract void setPrice(int price);
 
+	public int getQuantiy() {
+		return quantity;
+	}
+
 	// constructor for new products
-	public Item(double price, String description, String name, String[] ingredients, Integer size) {
+	public Item(int id, String category, double price, String description, String name, String[] ingredients, int size,
+			int quantity) {
 		this.price = price;
 		this.description = description;
 		this.name = name;
 		this.ingredients = ingredients;
 		this.size = size;
+		this.quantity = quantity;
+		this.id = id;
+		this.category = category;
 	}
 
 	@Override
@@ -75,8 +94,14 @@ public abstract class Item { // super class
 			}
 		}
 		str.append("\n Size = " + size + "ml");
+		str.append("\n Quantity = " + quantity);
 		return str.toString();
 
+	}
+
+	public String getCategory() {
+		// TODO Auto-generated method stub
+		return category;
 	}
 
 }

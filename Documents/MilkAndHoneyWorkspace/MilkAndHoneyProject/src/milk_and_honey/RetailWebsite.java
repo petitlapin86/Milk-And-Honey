@@ -1,9 +1,12 @@
 
 package milk_and_honey;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -16,19 +19,18 @@ import java.util.Scanner;
 
 public class RetailWebsite {
 
-	private static final String SHAMPOO = "Shampoo";
-	private static final String MOISTURIZER = "Moisturizer";
-	private static final String BODYOIL = "BodyOil";
-	private static final int MINIMUM_ATTRIBUTES_COUNT = 8;
-
 	private ArrayList<Item> productList;
 	private HashMap<String, ArrayList<Item>> productLookUp;
 	private Cart userCart;
+	private SQLHelper userDbHelper;
 
 	public RetailWebsite() {
-		productList = new ArrayList<Item>();
-		productLookUp = new HashMap<String, ArrayList<Item>>();
+
 		userCart = new Cart();
+
+		userDbHelper = new SQLHelper(Constants.DB_URL);
+		productList = userDbHelper.getAllProductList(Constants.ALL_TABLE);
+		productLookUp = new HashMap<String, ArrayList<Item>>();
 
 	}
 
@@ -66,6 +68,19 @@ public class RetailWebsite {
 		return thickShampoos;
 	}
 
+	private void updateInventory(Cart userCart) throws FileNotFoundException, IOException, ClassNotFoundException {
+		try (ObjectInputStream objIn = new ObjectInputStream(new FileInputStream(Constants.OBJECT_OUT_FILE));) {
+			try (ObjectOutputStream outObj = new ObjectOutputStream(
+					new FileOutputStream("./src/database/unavailable.txt"));) {
+				Item currentItem = (Item) (objIn.readObject());
+				if (currentItem.quantity == 0) {
+					outObj.writeObject(currentItem);
+				}
+			}
+		}
+
+	}
+
 	private void addItemToLookUp(String itemType, Item currentItem) {
 
 		if (!productLookUp.containsKey(itemType)) {
@@ -76,87 +91,16 @@ public class RetailWebsite {
 
 	}
 
-	public ArrayList<Item> processProductDatabase(String fileName)
-			throws IOException, InvalidProductTypeException, InsufficientAttributeException {
-		// Read products from database .csv file
-
-		String line = "";
-		String delimiter = ","; // comma separates the objects
-		try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-			while ((line = reader.readLine()) != null) {
-				String[] entries = line.split(delimiter);
-				int numOfEntries = entries.length;
-				if (numOfEntries < MINIMUM_ATTRIBUTES_COUNT) {
-					throw new InsufficientAttributeException(
-							"A minimum of " + MINIMUM_ATTRIBUTES_COUNT + " attributes are rquired. However \" " + line
-									+ "\" has only " + numOfEntries + " attributes");
-				}
-				String name = entries[1];
-				double price = Double.parseDouble(entries[2]);
-				String description = entries[3];
-				final int numOfIngredients = Integer.parseInt(entries[4]);
-				String[] ingredients = new String[numOfIngredients];
-				int startIngredientEntry = 5;
-				for (int i = 0; i < numOfIngredients; i++) {
-					ingredients[i] = entries[startIngredientEntry + i];
-				}
-				int size = Integer.parseInt(entries[startIngredientEntry + numOfIngredients]);
-
-				if (entries[0].equals(SHAMPOO)) { // If the first word in the line is shampoo
-					String hairType = entries[numOfEntries - 2];
-					boolean hairGrowth = false; // assume hairgrowth is false
-					if (entries[numOfEntries - 1].equals("Y")) { // unless a Y is indicated in the .csv file
-						hairGrowth = true; // then assign to true
-					}
-					// then create a new shamoo object with these params
-					Shampoo shampooObject = new Shampoo(name, price, description, ingredients, size, hairType,
-							hairGrowth);
-					productList.add(shampooObject);
-					addItemToLookUp(SHAMPOO, shampooObject);
-//					System.out.println(" Shampoo item was added with following info:");
-//					System.out.println(shampooObject);
-				} else if (entries[0].equals(MOISTURIZER)) { // Or If the first word in the line is moisturizer
-
-					String skinType = entries[numOfEntries - 2];
-					boolean acnePreventor = false;
-					if (entries[numOfEntries - 1].equals("Y")) {
-
-						acnePreventor = true;
-					}
-					// then create a new moisturizer object with these params
-					Moisturizer moisturizerObject = new Moisturizer(name, price, description, ingredients, size,
-							skinType, acnePreventor);
-					productList.add(moisturizerObject);
-					addItemToLookUp(MOISTURIZER, moisturizerObject);
-//					System.out.println("\n Moisturizer item was added with following info:");
-//					System.out.println(moisturizerObject);
-
-				} else if (entries[0].equals(BODYOIL)) { // Or If the first word in the line is body oil
-
-					String bodyConcern = entries[numOfEntries - 2];
-					boolean forDrySkin = false;
-					if (entries[numOfEntries - 1].equals("Y")) {
-						forDrySkin = true;
-					}
-					// then create a new body oil object with these params
-					BodyOil bodyoilObject = new BodyOil(name, price, description, ingredients, size, bodyConcern,
-							forDrySkin);
-					productList.add(bodyoilObject);
-					addItemToLookUp(BODYOIL, bodyoilObject);
-//					System.out.println("\n Body Oil item was added with following info:");
-//					System.out.println(bodyoilObject);
-				} else {
-					throw new InvalidProductTypeException(entries[0] + " is an invalid product type");
-				}
-
-			}
+	// Temporary fix. Replace this with SQL queries
+	private void createProductLookUp() {
+		for (Item currentItem : productList) {
+			addItemToLookUp(currentItem.getCategory(), currentItem);
 		}
-		return productList;
 	}
 
 	// Main Shopping Screen
 	public void startShopping() {
-
+		createProductLookUp();
 		Scanner in = new Scanner(System.in);
 		int choice;
 
@@ -166,7 +110,10 @@ public class RetailWebsite {
 			System.out.println("2. Body");
 			System.out.println("3. Face");
 			System.out.println("4. Display All Products");
-			System.out.println("5. Display Cart Contents");
+			System.out.println("5. Display limited availability items");
+			System.out.println("6. Display items by price low to high");
+			System.out.println("7. Display products on discount");
+			System.out.println("8. Display Cart Contents");
 			System.out.println("0. Exit");
 
 			choice = in.nextInt();
@@ -174,30 +121,62 @@ public class RetailWebsite {
 			switch (choice) {
 			case 1:
 				System.out.println("Below is the list of Hair Care products");
-				selectProduct(SHAMPOO, in);
+				selectProduct(Constants.SHAMPOO, in);
 				break;
 			case 2:
 				System.out.println("Below is the list of Body products");
-				selectProduct(BODYOIL, in);
+				selectProduct(Constants.BODYOIL, in);
 				break;
 			case 3:
 				System.out.println("Below is the list of Face products");
-				selectProduct(MOISTURIZER, in);
+				selectProduct(Constants.MOISTURIZER, in);
 				break;
 			case 4:
-				displayAllProducts();
+				displayAllProducts(productList);
 				break;
 			case 5:
+				System.out.println("Hurry!!, only few left");
+				displayLimitedAvailablItems();
+				break;
+			case 6:
+				System.out.println("Products in the order of low to high price");
+				ArrayList<Item> resultList = userDbHelper.priceLowToHigh(Constants.ALL_TABLE);
+				displayAllProducts(resultList);
+				break;
+			case 7:
+				System.out.println("THe following products are on discount");
+				userDbHelper.displayAllDiscountedProducts(Constants.DISCOUNT_PRODUCTS, Constants.ALL_TABLE);
+				break;
+			case 8:
 				userCart.displayCart();
 				break;
 			case 0:
 				System.out.println("Thank you for shooping at Milk and Honey");
+				try {
+					updateInventory(userCart);
+					userDbHelper.dropTable(Constants.ALL_TABLE);
+					userDbHelper.dropTable(Constants.DISCOUNT_PRODUCTS);
+				} catch (IOException | ClassNotFoundException e) {
+					e.printStackTrace();
+				}
 				return;
 			default:
 				System.out.println("Invalid choice. PLease enter one of the options from the following menu");
 			}
 
 		}
+
+	}
+
+	private void displayLimitedAvailablItems() {
+		productList.stream() // convert the given array into sequence of objects to be fed into the following
+								// operations
+				.filter(w -> (w.getQuantity() <= Constants.LIMITED_AVAILABILTY_QUANTIY)) // for each object coming from
+																							// stream
+				// check if the specified condition is
+				// met
+				.forEach(System.out::println);
+
 	}
 
 	private void displayItemsOfGivenType(String type) {
@@ -207,10 +186,10 @@ public class RetailWebsite {
 		}
 	}
 
-	private void displayAllProducts() {
+	private void displayAllProducts(ArrayList<Item> inputList) {
 		System.out.println("Below is tour product list");
 		int i = 1;
-		for (Item currentItem : productList) {
+		for (Item currentItem : inputList) {
 			System.out.println((i++) + ". " + currentItem);
 		}
 	}

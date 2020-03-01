@@ -8,6 +8,10 @@ package milk_and_honey;
 
 public abstract class Hair extends Item {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1977879108143509188L;
 	String hairType;
 
 	public String getHairType() {
@@ -18,8 +22,9 @@ public abstract class Hair extends Item {
 		this.hairType = hairType;
 	}
 
-	public Hair(double price, String decription, String name, String[] ingredients, Integer size, String hairType) {
-		super(price, decription, name, ingredients, size);
+	public Hair(int id, String category, double price, String decription, String name, String[] ingredients, int size,
+			int quantity, String hairType) {
+		super(id, category, price, decription, name, ingredients, size, quantity);
 		this.hairType = hairType;
 		// TODO Auto-generated constructor stub
 	}

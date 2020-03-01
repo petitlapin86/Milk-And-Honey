@@ -8,11 +8,15 @@ package milk_and_honey;
 
 public class Shampoo extends Hair {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7656119571319214291L;
 	private boolean hairGrowth = false;
 
-	public Shampoo(String name, double price, String decription, String[] ingredients, Integer size, String hairType,
-			boolean hairGrowth) {
-		super(price, decription, name, ingredients, size, hairType);
+	public Shampoo(int id, String category, String name, double price, String decription, String[] ingredients,
+			int size, int quantity, String hairType, boolean hairGrowth) {
+		super(id, category, price, decription, name, ingredients, size, quantity, hairType);
 		this.hairGrowth = hairGrowth;
 		// TODO Auto-generated constructor stub
 	}

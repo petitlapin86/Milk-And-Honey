@@ -7,6 +7,10 @@ package milk_and_honey;
  */
 public abstract class Face extends Item {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8134502411581520220L;
 	String skinType;
 
 	public String getSkinType() {
@@ -17,8 +21,9 @@ public abstract class Face extends Item {
 		this.skinType = skinType;
 	}
 
-	public Face(double price, String decription, String name, String[] ingredients, Integer size, String skinType) {
-		super(price, decription, name, ingredients, size);
+	public Face(int id, String category, double price, String decription, String name, String[] ingredients, int size,
+			int quantity, String skinType) {
+		super(id, category, price, decription, name, ingredients, size, quantity);
 		this.skinType = skinType;
 		// TODO Auto-generated constructor stub
 	}
