@@ -9,25 +9,58 @@ import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Purpose: Create tables for products
+ * Purpose: Create tables for products. In-charge of loading the product
+ * information from csv to SQL DB
  * 
  * @author Paige Jones
  */
 
 public class ProductDbCreator {
 
+	// function to add elements to the productLookUp hash-map
 	private static void addItemToLookUp(ConcurrentHashMap<String, ArrayList<Item>> productLookUp, String itemType,
 			Item currentItem) {
 
+		// if the given category is not in productlookup then create an entry for the
+		// given category and assign an empty arrayLIst as it's corresponding value.
 		if (!productLookUp.containsKey(itemType)) {
 			productLookUp.put(itemType, new ArrayList<Item>());
 
 		}
+		// Get the corresponding arrayLIst for the given category and Add the given item
+		// object to the retrieved arayLIst
 		productLookUp.get(itemType).add(currentItem);
 
 	}
 
+	// javadoc is not necessary for private functions as they are not exposed to
+	// functions outside the current class
+	// Note that in order to use createTables method in the processProductDatabase
+	// function then the createTables has to be static
+	// Given a static function, only other static functions can be invoked inside
+	// it.
+	// THis function creates the SQL commands to create tables and gives it to the
+	// productDbHelper to execute these sql command.
+	// 4 tables will be created.
+	// ALL_TABLE - A table that contains all products across all categories. The
+	// columns in this table = the variables defined in the ITem class (8 columns in
+	// total)
+	// SHAMPOO - A table that contains only Shampoo product info. The columns in
+	// this table = variables in ITem + variable sin Hair + Variables in Shampoo (10
+	// columns in total)
+	// MOISTURIZER - A table that contains only Moisturizer product info. The
+	// columns in this table = variables in ITem + variables in Face + Variables in
+	// Moisturizer
+	// (10 columns in total)
+	// BODY OIL - A table that contains only Body oil product info. The columns in
+	// this table = variables in ITem + variables in Body + Variables in Body oil
+	// (10 columns in total)
 	private static void createTables(SQLHelper productDbHelper) {
+		// SQL query to create table if no such table exists. If a table of the given
+		// name exists then nothing is done. ID is a primary key implying that the
+		// values in the ID column are all unique and can be used to index the table.
+		// NOT NULL implies that whenever a row is inserted into the table, it should
+		// contain values for the the column specified as not null
 		String sqlCreateTable = "CREATE TABLE IF NOT EXISTS 	" + Constants.ALL_TABLE + "(\n" + "	" + Constants.ID
 				+ " integer PRIMARY KEY, \n" + "	" + Constants.CATEGORY + " text NOT NULL, \n" + "	"
 				+ Constants.NAME + " text NOT NULL, \n" + "	" + Constants.PRICE + " real, \n" + " "
@@ -68,6 +101,26 @@ public class ProductDbCreator {
 		System.out.println("Table " + Constants.BODYOIL + " is created");
 	}
 
+	// Remember to add javadoc for public methods
+	/**
+	 * Static method to load product information from csv to SQL Database
+	 * 
+	 * @param fileName        The csv file that contains the product information
+	 * @param productDbHelper The database helper object that facilitates the
+	 *                        population of the SQL dB
+	 * @param productList     Array list that contains all product information
+	 * @param productLookUp   Hashmap that stores products base don their category
+	 * @throws IOException                    - Exception thrown when the product
+	 *                                        info csv file is missing
+	 * @throws InvalidProductTypeException    - Exception thrown when the product
+	 *                                        csv has an undefined product category
+	 * @throws InsufficientAttributeException - Exception thrown when the product
+	 *                                        csv has missing product information
+	 */
+	// Note: WE are not catching the exceptions thrown by the code inside this
+	// function, hence we declare the thrown exceptions next to the function
+	// definition. These exceptions have to be caught and handled by the code that
+	// invokes the below function
 	public static void processProductDatabase(String fileName, SQLHelper productDbHelper, ArrayList<Item> productList,
 			ConcurrentHashMap<String, ArrayList<Item>> productLookUp)
 			throws IOException, InvalidProductTypeException, InsufficientAttributeException {

@@ -1,6 +1,7 @@
 
 package milk_and_honey;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -68,13 +69,45 @@ public class RetailWebsite {
 		return thickShampoos;
 	}
 
+	// WE have encountered reading from file before. For example in order to load
+	// the product information we read the porduct_database.csv. The problem of
+	// creating objects of ITem subclass from the csv is that we need to explicitly
+	// process each token in a line and assign it to the corresponding variables in
+	// the Item subclasses. This method is a bit tedious owing to the explicit
+	// processing of tokens. For circumstances wherein the object of the
+	// corresponding classes are created and we would like to store some information
+	// into file, we could get away by simply dumping the objects into a file. The
+	// objects are written into the file in a way such that when the file is read,
+	// objects in the file can be loaded automatically to objects of the
+	// corresponding classes without any explicit processing. THis mechanism of
+	// writing and reading of class objects is achieved using ObjectOutputSteam and
+	// ObjectINputStream respectively
 	private void updateInventory(Cart userCart) throws FileNotFoundException, IOException, ClassNotFoundException {
+		// Create an ObjecInputStream object associated to the file where the Item
+		// objects are written. The objects were written into the specified file earlier
+		// in the code using ObjectOutputStream
 		try (ObjectInputStream objIn = new ObjectInputStream(new FileInputStream(Constants.OBJECT_OUT_FILE));) {
+			// Create an ObjectOutputStream object associated to the file where you would
+			// like to write the unavailable Item objects
+			// Note that we are neither closing objInt nor outObj after we are done using.
+			// THis is because these variables are created in the try scope. As soon as the
+			// try block is done these streams are automatically closed.
 			try (ObjectOutputStream outObj = new ObjectOutputStream(
 					new FileOutputStream("./src/database/unavailable.txt"));) {
-				Item currentItem = (Item) (objIn.readObject());
-				if (currentItem.quantity == 0) {
-					outObj.writeObject(currentItem);
+				// keep on reading the file until you get EOFException
+				while (true) {
+					try {
+						// readObject will read the object from the beginning of the file and keeps
+						// traversing down the file
+						Item currentItem = (Item) (objIn.readObject());
+						if (currentItem.quantity == 0) {
+							// if item quantity is 0 then write to unavailable file
+							outObj.writeObject(currentItem);
+						}
+					} catch (EOFException ex) {
+						// EOF exception implies end of file reached so come out of the while loop
+						break;
+					}
 				}
 			}
 		}
@@ -154,8 +187,8 @@ public class RetailWebsite {
 				System.out.println("Thank you for shooping at Milk and Honey");
 				try {
 					updateInventory(userCart);
-					userDbHelper.dropTable(Constants.ALL_TABLE);
-					userDbHelper.dropTable(Constants.DISCOUNT_PRODUCTS);
+//					userDbHelper.dropTable(Constants.ALL_TABLE);
+//					userDbHelper.dropTable(Constants.DISCOUNT_PRODUCTS);
 				} catch (IOException | ClassNotFoundException e) {
 					e.printStackTrace();
 				}
@@ -168,6 +201,22 @@ public class RetailWebsite {
 
 	}
 
+	// Lambdas : lambdas are inline and temporary variables that are used to write
+	// inline function codes. THe format for declaring the lambda is
+	// lamabda_variable
+	// =>
+	// Note that lambda variables need not be declared, just the variable name is
+	// enough. THink of lambda variables as inputs to the function. If a function
+	// code is only a couple of lines then instead of creating a separate function
+	// and populating it , it is better to used lambda variables and create an
+	// inline
+	// function
+	// It is also possible to have more than one lambda variable w,v -> function
+	// code using w and v
+	// Stream : Stream is used on array like datastructures that contain a sequence
+	// of objects. Applying a stream on an arraylist as shown below causes the
+	// functions following the stream to be applied once for every element of the
+	// arraylist
 	private void displayLimitedAvailablItems() {
 		productList.stream() // convert the given array into sequence of objects to be fed into the following
 								// operations

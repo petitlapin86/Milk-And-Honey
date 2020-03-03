@@ -5,10 +5,13 @@ import java.io.Serializable;
 /**
  * Item is a super class that stubs out new products body, face and hair all
  * inherit from this class as well as their children: shampoo, body oil and
- * moisturizer
+ * moisturizer.
  *
  * @author Paige Jones
  */
+
+//This is an abstract class as indicated by the abstract keyword.
+//It basically lists out all variables that is common to Hair, face and body products
 
 public abstract class Item implements Serializable {
 	/**
@@ -35,7 +38,10 @@ public abstract class Item implements Serializable {
 
 	public abstract void display();
 
-	public abstract String getType();
+	// This function also implements polymorphism
+	public String getType() {
+		return "Item";
+	}
 
 	// Returns the price of the item
 	public double getPrice() {
@@ -81,6 +87,21 @@ public abstract class Item implements Serializable {
 		this.category = category;
 	}
 
+	// THis functiuon implements polymorphism. Polymorphism is a process that is
+	// related to Inheritance.
+	// Polymorphism => "one name but many forms"
+	// This implies that the children and the parent all have functions with the
+	// same but each of them defines their own functionality
+	// toString function implements polymorphism because Item, Body, Hair and Face
+	// all have toString but their behaviour
+	// varies based on the object type that invoke the toString function.
+	// For example
+	// Item bodyObj = new Body();
+	// bodyObj.toString(); will invoke the toString function of the Body class
+	// bodyObj belongs to Body class is resolved dynamically at run time
+	// Polymprphism is also associated with @Override tag. Whenever you redefine the
+	// functionality of a function defined in the parent class
+	// use the @Override keyword, indicating polymorphism
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
@@ -100,7 +121,6 @@ public abstract class Item implements Serializable {
 	}
 
 	public String getCategory() {
-		// TODO Auto-generated method stub
 		return category;
 	}
 

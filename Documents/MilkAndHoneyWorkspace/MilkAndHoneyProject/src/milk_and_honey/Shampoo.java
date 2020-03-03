@@ -30,7 +30,7 @@ public class Shampoo extends Hair {
 	@Override
 	public String getType() {
 		// TODO Auto-generated method stub
-		return null;
+		return Constants.SHAMPOO;
 	}
 
 	@Override

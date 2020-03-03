@@ -12,9 +12,10 @@ import java.util.Scanner;
 public class User extends Thread {
 
 	public void run() {
+
 		Scanner input = new Scanner(System.in);
 		// Ask User for name
-		System.out.print("Welcome! What is your name?: ");
+		System.out.println("Welcome! What is your name?: ");
 		String myString = input.next();
 		System.out.println("Hey " + myString + ", Thanks for stopping by the Milk & Honey Store. \n");
 
